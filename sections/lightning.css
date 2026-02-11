@@ -1,0 +1,139 @@
+.ag-format-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 15;
+}
+
+/* Flash Effect - Faster loop */
+.ag-flash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0);
+    z-index: 20;
+    animation: an-flash 6s linear infinite;
+    /* Increased frequency */
+}
+
+/* Common Lightning Styles */
+[class^="ag-lightning-"] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0;
+    z-index: 10;
+}
+
+/* Specific Lightning Instances with Random Pos/Timing - Much faster durations */
+
+/* Left Side Strike */
+.ag-lightning-1 {
+    background-image: url(/lightning-1.png);
+    background-position: 10% 20%;
+    background-size: 40% auto;
+    animation: an-lightning-strike 4s linear infinite;
+    /* 4s loop */
+    animation-delay: 0s;
+}
+
+/* Right Side Strike */
+.ag-lightning-2 {
+    background-image: url(/lightning-2.png);
+    background-position: 85% 30%;
+    background-size: 35% auto;
+    animation: an-lightning-strike 5s linear infinite;
+    /* 5s loop */
+    animation-delay: 2.5s;
+}
+
+/* Center Strike */
+.ag-lightning-3 {
+    background-image: url(/lightning-1.png);
+    transform: scaleX(-1);
+    background-position: 50% 10%;
+    background-size: 50% auto;
+    animation: an-lightning-strike 7s linear infinite;
+    /* 7s loop */
+    animation-delay: 1s;
+}
+
+/* Random Top Strike */
+.ag-lightning-4 {
+    background-image: url(/lightning-2.png);
+    background-position: 30% -10%;
+    background-size: 60% auto;
+    animation: an-lightning-strike 6s linear infinite;
+    /* 6s loop */
+    animation-delay: 4s;
+}
+
+/* Far Right Low */
+.ag-lightning-5 {
+    background-image: url(/lightning-1.png);
+    background-position: 90% 40%;
+    background-size: 30% auto;
+    animation: an-lightning-strike 8s linear infinite;
+    /* 8s loop */
+    animation-delay: 0.5s;
+}
+
+@keyframes an-flash {
+
+    0%,
+    90% {
+        background: rgba(255, 255, 255, 0);
+    }
+
+    92% {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Flash */
+    93% {
+        background: rgba(255, 255, 255, 0);
+    }
+
+    96% {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Mini flash */
+    100% {
+        background: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes an-lightning-strike {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+        filter: brightness(3);
+    }
+
+    /* Intense start */
+    3% {
+        opacity: 1;
+        filter: brightness(2);
+    }
+
+    5% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,129 @@
+.bg-wrapper {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-family: 'Noto Sans Display', sans-serif;
+  justify-content: center;
+  min-height: 100vh;
+  transition: background-color 0.5s ease;
+  overflow: hidden;
+}
+
+.clouds {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 540px;
+  text-align: center;
+}
+
+.animation {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Gradients for fading the top and bottom of the cloud section */
+.animation::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: background 0.5s ease;
+}
+
+.animation::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  transition: background 0.5s ease;
+}
+
+/* Theme Classes */
+.white::before { background: linear-gradient(0deg, #fff, #fff0, #fff); }
+.white::after { background: #03a9f445; }
+
+.black::before { background: linear-gradient(0deg, #151515, #15151500, #151515); }
+.black::after { background: #ff996630; }
+
+.lightblack::before { background: linear-gradient(0deg, #353535, #35353500, #353535); }
+.lightblack::after { background: #00968875; }
+
+.cyan::before { background: linear-gradient(0deg, #b2ebf2 0%, #b2ebf200 38%, #b2ebf200 58%, #b2ebf2 100%); }
+.cyan::after { background: #034070a0; }
+
+.animation .cloud {
+  background-repeat: repeat-x;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.cloud1 {
+  background-image: url('https://raw.githubusercontent.com/gestok/clouds/main/clouds/clouds_1.png');
+  animation: move1 20s infinite linear;
+}
+.cloud2 {
+  background-image: url('https://raw.githubusercontent.com/gestok/clouds/main/clouds/clouds_2.png');
+  animation: move1 15s infinite linear;
+}
+.cloud3 {
+  background-image: url('https://raw.githubusercontent.com/gestok/clouds/main/clouds/clouds_3.png');
+  animation: move1 17s infinite linear;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.clouds h2 { font-size: 40px; text-shadow: 0 1px 2px #15151550; margin: 0 0 12px; }
+.clouds p { max-width: 400px; margin: 6px auto 24px; text-shadow: 0 1px 2px #15151550; }
+
+.btn {
+  background: transparent;
+  border: solid 1px #fff;
+  padding: 10px 21px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover { background: rgba(255,255,255,0.2); }
+
+/* Divider UI */
+.divider { position: relative; height: 28px; margin: 10px 0; }
+.divider::before {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 100px; height: 1px;
+  background: linear-gradient(90deg, #fff 35%, transparent 35%, transparent 65%, #fff 65%);
+  transform: translate(-50%,-50%);
+}
+.divider::after {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 100px; height: 10px; width: 10px;
+  background: #fff; transform: translate(-50%,-50%) rotate(45deg);
+}
+
+@keyframes move1 { 100% { background-position: -1000px 0; } }
+
+/* Floating Options */
+.options { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 10; }
+.opt { width: 30px; height: 30px; border-radius: 50%; border: none; cursor: pointer; box-shadow: 4px 4px 8px rgba(0,0,0,0.3); }
+.opt1 { background: linear-gradient(45deg, #fff 50%, #03a9f445 50%); }
+.opt2 { background: linear-gradient(45deg, #151515 50%, #f96 50%); }
+.opt3 { background: linear-gradient(45deg, #353535 50%, #009688 50%); }
+.opt4 { background: linear-gradient(45deg, #b2ebf2 50%, #034070 50%); }
