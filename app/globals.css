@@ -47,3 +47,21 @@ body {
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.5));
 }
+
+@utility mystic-button {
+  @apply relative px-8 py-3 font-bold uppercase tracking-wider text-sm transition-all duration-300;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.2), inset 0 0 20px rgba(245, 158, 11, 0.1);
+  text-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+}
+
+@utility mystic-button:hover {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 1);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.6), inset 0 0 30px rgba(245, 158, 11, 0.2);
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+}

@@ -57,20 +57,20 @@ export default function IntroSection() {
 
                 {/* Text 1: Most AI tools... */}
                 <div ref={text1Ref} className="absolute inset-0 flex flex-col items-center justify-center space-y-6">
-                    <p className="text-sm md:text-base text-gray-200 uppercase tracking-[0.2em] mix-blend-difference">
+                    <p className="text-sm md:text-base text-apex uppercase tracking-[0.2em] mix-blend-difference">
                         Section 1 — What This Is
                     </p>
-                    <h2 className="text-3xl md:text-5xl font-light leading-tight text-white drop-shadow-md">
+                    <h2 className="text-3xl md:text-5xl font-light leading-tight text-apex drop-shadow-md">
                         Most AI tools answer questions and <span className="font-bold">forget you five minutes later.</span>
                     </h2>
                 </div>
 
                 {/* Text 2: Apex Companion AI... */}
                 <div ref={text2Ref} className="absolute inset-0 flex flex-col items-center justify-center space-y-8 opacity-0 translate-y-20">
-                    <h3 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-linear-to-b from-white to-gray-300 drop-shadow-lg">
+                    <h3 className="text-4xl md:text-6xl font-bold text-apex drop-shadow-lg">
                         Apex Companion AI is different.
                     </h3>
-                    <div className="space-y-4 text-xl md:text-2xl text-white font-medium max-w-2xl mx-auto drop-shadow-md">
+                    <div className="space-y-4 text-xl md:text-2xl text-apex font-medium max-w-2xl mx-auto drop-shadow-md">
                         <p>It stays with you.</p>
                         <p>It remembers what you’re building.</p>
                         <p>It helps you stay focused and move forward every day.</p>

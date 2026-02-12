@@ -25,10 +25,11 @@ export default function WhyItIsDifferent() {
 
             if (items) {
                 gsap.fromTo(items,
-                    { opacity: 0, x: -50 },
+                    { opacity: 0, y: 50, filter: "blur(10px)" },
                     {
                         opacity: 1,
-                        x: 0,
+                        y: 0,
+                        filter: "blur(0px)",
                         duration: 0.8,
                         stagger: 0.2,
                         ease: "power2.out",
@@ -46,23 +47,33 @@ export default function WhyItIsDifferent() {
     }, []);
 
     return (
-        <section id="section-2" className="relative min-h-screen flex flex-col items-center justify-center py-24 px-6 text-white pointer-events-none">
-            <div className="max-w-5xl w-full mx-auto grid md:grid-cols-2 gap-16 items-center pointer-events-auto">
-                <div className="space-y-8">
-                    <p className="text-sm md:text-base text-amber-400 uppercase tracking-[0.2em] font-bold drop-shadow-md">
+        <section id="section-2" className="relative min-h-screen flex flex-col items-center justify-center py-32 px-6 text-white pointer-events-none">
+            <div className="max-w-4xl w-full mx-auto flex flex-col items-center text-center gap-20 pointer-events-auto">
+                <div className="space-y-6">
+                    <p className="text-sm md:text-base text-apex uppercase tracking-[0.3em] font-bold drop-shadow-md opacity-80">
                         Section 2 — Why It’s Different
                     </p>
-                    <h2 className="text-5xl md:text-7xl font-bold leading-none drop-shadow-xl">
-                        Not Public AI.<br />
-                        <span className="text-gray-200 text-3xl md:text-5xl block mt-4">Built around your world.</span>
+                    <h2 className="text-5xl md:text-7xl font-bold leading-none drop-shadow-2xl text-apex">
+                        Not Public AI.
+                        <span className="block mt-4 text-3xl md:text-5xl opacity-90">Built around your world.</span>
                     </h2>
                 </div>
 
-                <ul ref={listRef} className="space-y-8 bg-black/40 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
+                <ul ref={listRef} className="flex flex-col items-center space-y-12">
                     {features.map((feature, index) => (
-                        <li key={index} className="flex items-center gap-6 text-xl md:text-2xl text-white font-light group">
-                            <span className="w-2 h-2 rounded-full bg-amber-500 group-hover:scale-150 transition-transform duration-300 shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
-                            {feature}
+                        <li key={index} className="text-2xl md:text-4xl font-light tracking-wide group relative">
+                            {/* Mystic Glow behind text */}
+                            <div className="absolute inset-0 bg-white/5 blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-700" />
+
+                            {/* Text Content */}
+                            <span className="relative z-10 transition-transform duration-500 group-hover:scale-105 inline-block text-apex">
+                                {feature}
+                            </span>
+
+                            {/* Subtle separator line (except for last item) */}
+                            {index !== features.length - 1 && (
+                                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-12 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                            )}
                         </li>
                     ))}
                 </ul>
