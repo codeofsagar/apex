@@ -73,7 +73,7 @@ function CloudScene() {
 
 export default function TexturedClouds() {
     return (
-        <div className="absolute inset-0 w-full h-full bg-slate-900 pointer-events-none">
+        <div className="absolute inset-0 w-full h-full bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-amber-400 via-yellow-600 to-amber-900 pointer-events-none">
             <Canvas camera={{ position: [0, 0, 15], fov: 60 }}>
                 {/* Ambient light for general visibility */}
                 <ambientLight intensity={0.2} />
@@ -93,7 +93,7 @@ export default function TexturedClouds() {
                         mipmapBlur
                     />
                     {/* The Noise effect adds the fine-grained 'texture' to the overall air */}
-                  
+
                 </EffectComposer>
             </Canvas>
         </div>
