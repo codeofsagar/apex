@@ -16,6 +16,35 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
+  const orbVideoRef = useRef<HTMLVideoElement>(null);
+  const orbCanvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Canvas-based orb renderer (fixes iOS Safari mix-blend-mode on video)
+  useEffect(() => {
+    const video = orbVideoRef.current;
+    const canvas = orbCanvasRef.current;
+    if (!video || !canvas) return;
+
+    const ctx2d = canvas.getContext('2d');
+    if (!ctx2d) return;
+
+    let animId: number;
+
+    const draw = () => {
+      if (video.readyState >= 2) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx2d.drawImage(video, 0, 0, canvas.width, canvas.height);
+      }
+      animId = requestAnimationFrame(draw);
+    };
+
+    video.addEventListener('playing', () => draw());
+    // Start drawing if already playing
+    if (!video.paused) draw();
+
+    return () => cancelAnimationFrame(animId);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -24,7 +53,7 @@ export default function Hero() {
         scrollTrigger: {
           trigger: document.body,
           start: "top top",
-          end: "+=100%", // Valid syntax
+          end: "+=100%",
           scrub: true
         },
         opacity: 0,
@@ -66,16 +95,24 @@ export default function Hero() {
     <section ref={sectionRef} className="relative h-screen w-full overflow-hidden">
       <Navbar />
 
-      {/* Orb Video - Fixed Top Center */}
-      <div className="orb-container fixed md:ml-6 ml-3  top-70 md:top-0  left-1/2 -translate-x-1/2 z-[100] pointer-events-none mix-blend-screen">
+      {/* Orb Video - Canvas-based for iOS mix-blend-mode support */}
+      <div className="orb-container fixed md:ml-6 ml-3 top-70 md:top-0 left-1/2 -translate-x-1/2 z-[100] pointer-events-none">
+        {/* Hidden video source */}
         <video
+          ref={orbVideoRef}
           autoPlay
           loop
+          muted
           playsInline
-          className="orb-video md:w-[500px] w-[800px] scale-250 md:scale-100 h-auto object-cover brightness-150 contrast-225"
+          className="absolute w-0 h-0 opacity-0"
         >
           <source src="/orb.mp4" type="video/mp4" />
         </video>
+        {/* Visible canvas with mix-blend-screen */}
+        <canvas
+          ref={orbCanvasRef}
+          className="orb-video md:w-[500px] w-[800px] scale-250 md:scale-100 h-auto object-cover brightness-150 contrast-225 mix-blend-screen"
+        />
       </div>
 
       {/* Cloud + Rain Layer - z-0 (below background) */}
