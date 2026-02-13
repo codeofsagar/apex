@@ -67,20 +67,13 @@ export default function Hero() {
       <Navbar />
 
       {/* Orb Video - Fixed Top Center */}
-      <div className="orb-container fixed md:ml-6 ml-3 top-70 md:top-0 left-1/2 -translate-x-1/2 z-[100] pointer-events-none"
-        style={{ isolation: 'isolate' }}
-      >
+      <div className="orb-container fixed md:ml-6 ml-3 top-70 md:top-0 left-1/2 -translate-x-1/2 z-[100] pointer-events-none mix-blend-screen">
         <video
           autoPlay
           loop
           muted
           playsInline
           className="orb-video md:w-[500px] w-[800px] scale-250 md:scale-100 h-auto object-cover brightness-150 contrast-225"
-          style={{
-            mixBlendMode: 'screen',
-            WebkitMixBlendMode: 'screen',
-            transform: 'translateZ(0)',
-          } as React.CSSProperties}
         >
           <source src="/orb.mp4" type="video/mp4" />
         </video>
