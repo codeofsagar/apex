@@ -50,7 +50,7 @@ export default function Navbar() {
                         <Link
                             key={item.name}
                             href={item.path}
-                            className="hover:text-white hover:scale-105 transition-all duration-300 uppercase"
+                            className="hover:text-white hover:scale-105 hover:[text-shadow:0_0_5px_rgba(255,255,255,1)] transition-all duration-300 uppercase"
                         >
                             {item.name}
                         </Link>
@@ -74,7 +74,7 @@ export default function Navbar() {
                             key={item.name}
                             href={item.path}
                             onClick={() => setIsOpen(false)}
-                            className="text-2xl text-apex font-light uppercase tracking-widest hover:text-white hover:scale-110 transition-all duration-300"
+                            className="text-2xl text-apex font-light uppercase tracking-widest hover:text-white hover:scale-110 hover:[text-shadow:0_0_5px_rgba(255,255,255,1)] transition-all duration-300"
                             style={{ transitionDelay: `${idx * 50}ms` }}
                         >
                             {item.name}

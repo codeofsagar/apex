@@ -1,71 +1,150 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Cloud, Clouds } from '@react-three/drei';
 import * as THREE from 'three';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
+
+// Individual animated cloud wrapper
+function DriftingCloud({ seed, bounds, volume, color, basePosition, opacity, segments, speed = 1, bobAmount = 0.5 }: {
+    seed: number;
+    bounds: [number, number, number];
+    volume: number;
+    color: string;
+    basePosition: [number, number, number];
+    opacity: number;
+    segments: number;
+    speed?: number;
+    bobAmount?: number;
+}) {
+    const ref = useRef<THREE.Group>(null);
+    const offset = useRef(Math.random() * Math.PI * 2);
+
+    useFrame((state) => {
+        if (ref.current) {
+            const t = state.clock.elapsedTime;
+            // Horizontal drift
+            ref.current.position.x = basePosition[0] + Math.sin(t * 0.08 * speed + offset.current) * 2;
+            // Vertical bob
+            ref.current.position.y = basePosition[1] + Math.sin(t * 0.15 * speed + offset.current * 2) * bobAmount;
+            // Depth sway
+            ref.current.position.z = basePosition[2] + Math.cos(t * 0.05 * speed + offset.current) * 0.5;
+        }
+    });
+
+    return (
+        <group ref={ref}>
+            <Cloud
+                seed={seed}
+                bounds={bounds}
+                volume={volume}
+                color={color}
+                opacity={opacity}
+                segments={segments}
+            />
+        </group>
+    );
+}
 
 function CloudScene() {
     const group = useRef<THREE.Group>(null);
 
-    // Texture loader removed to fix runtime error
-
     useFrame((state, delta) => {
         if (group.current) {
+            // Slow continuous rotation for depth
             group.current.rotation.y += delta * 0.01;
-            group.current.position.y = Math.sin(state.clock.elapsedTime * 0.1) * 0.2;
         }
     });
 
     return (
         <group ref={group}>
-            {/* Reduced limit further to 80 to support active rendering during Zoom */}
-            <Clouds limit={80}>
-                {/* Using MeshStandardMaterial with high roughness 
-                  prevents the 'plastic' look and reacts to the directional light 
-                */}
+            <Clouds limit={60}>
                 <meshStandardMaterial
                     transparent
-                    opacity={0.8}
+                    opacity={1}
                     roughness={1}
                     metalness={0}
+                    emissive="#2a4a50"
+                    emissiveIntensity={0.5}
                     side={THREE.DoubleSide}
                 />
 
-                {/* Main thick clouds */}
-                <Cloud
-                    seed={10}
-                    bounds={[15, 2, 2]}
-                    volume={15}
-                    color="#f2f2f2"
-                    position={[0, 0, -5]}
-                    opacity={0.6}
-                    speed={0.2}
-                    segments={20} // Reduced from 40 for performance
+                {/* Main Storm Mass - Dark core */}
+                <DriftingCloud
+                    seed={42}
+                    bounds={[14, 4, 4]}
+                    volume={14}
+                    color="#4a7a82"
+                    basePosition={[0, 1, -2]}
+                    opacity={1}
+                    segments={18}
+                    speed={0.8}
+                    bobAmount={0.4}
                 />
 
-                {/* Darker base clouds for depth (The 'Dull' look) */}
-                <Cloud
-                    seed={20}
-                    bounds={[20, 3, 5]}
+                {/* Lower Heavy Clouds */}
+                <DriftingCloud
+                    seed={55}
+                    bounds={[20, 3, 6]}
                     volume={10}
-                    color="#899499" // Paynes Grey
-                    position={[2, -3, -8]}
-                    opacity={0.4}
-                    speed={0.1}
+                    color="#3a5d62"
+                    basePosition={[4, -3, -5]}
+                    opacity={0.95}
+                    segments={14}
+                    speed={1.2}
+                    bobAmount={0.6}
                 />
 
-                {/* Wispy outer layers */}
-                <Cloud
-                    seed={30}
-                    bounds={[25, 5, 10]}
-                    volume={20}
-                    color="#d1d5db"
-                    position={[-5, 5, -12]}
-                    opacity={0.3}
-                    speed={0.3}
-                    growth={4}
+                {/* Upper Drifting Layer */}
+                <DriftingCloud
+                    seed={123}
+                    bounds={[22, 5, 8]}
+                    volume={12}
+                    color="#5a8a92"
+                    basePosition={[-4, 5, -7]}
+                    opacity={0.7}
+                    segments={14}
+                    speed={0.6}
+                    bobAmount={0.8}
+                />
+
+                {/* Side Cloud - Left */}
+                <DriftingCloud
+                    seed={77}
+                    bounds={[16, 3, 5]}
+                    volume={9}
+                    color="#446870"
+                    basePosition={[-7, -1, -3]}
+                    opacity={0.85}
+                    segments={12}
+                    speed={1.0}
+                    bobAmount={0.5}
+                />
+
+                {/* Side Cloud - Right */}
+                <DriftingCloud
+                    seed={91}
+                    bounds={[14, 3, 4]}
+                    volume={8}
+                    color="#4e7a82"
+                    basePosition={[7, 2, -4]}
+                    opacity={0.8}
+                    segments={10}
+                    speed={1.4}
+                    bobAmount={0.3}
+                />
+
+                {/* Foreground Wisp */}
+                <DriftingCloud
+                    seed={33}
+                    bounds={[10, 2, 3]}
+                    volume={6}
+                    color="#5a8a90"
+                    basePosition={[2, -5, 2]}
+                    opacity={0.5}
+                    segments={8}
+                    speed={1.8}
+                    bobAmount={0.7}
                 />
             </Clouds>
         </group>
@@ -74,27 +153,29 @@ function CloudScene() {
 
 export default function TexturedClouds() {
     return (
-        <div className="absolute inset-0 w-full h-full bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-amber-400 via-yellow-600 to-amber-900 pointer-events-none">
-            {/* 
-                Optimization: dpr={[1, 1.5]} ensures we don't render at full 4K on high-DPI screens, 
-                which is the #1 cause of lag. 1.2x is even faster and visually sufficient for motion.
-            */}
-            <Canvas camera={{ position: [0, 0, 15], fov: 60 }} dpr={[1, 1.2]}>
-                {/* Ambient light for general visibility */}
-                <ambientLight intensity={0.2} />
+        <div className="absolute inset-0 w-full h-full bg-[#102023] pointer-events-none">
 
-                {/* Key light to create highlights on the cloud "rims" */}
-                <directionalLight position={[10, 10, 5]} intensity={1.5} color="#fffcf2" />
+            <Canvas
+                camera={{ position: [0, 0, 12], fov: 60 }}
+                dpr={[1, 1.2]}
+                gl={{ powerPreference: "high-performance", antialias: false }}
+            >
+                {/* 1. Ambient: Dim moody light */}
+                <ambientLight intensity={0.8} color="#2a4a50" />
 
-                {/* Rim light from behind for silhouette definition */}
-                <pointLight position={[-10, -5, -10]} intensity={0.8} color="#94a3b8" />
+                {/* 2. Storm Light: From above */}
+                <directionalLight position={[-5, 10, 5]} intensity={2.5} color="#5a8a95" />
+
+                {/* 3. Under-glow: Deep teal */}
+                <pointLight position={[5, -10, 5]} intensity={1.5} color="#2a4a50" />
+
+                {/* 4. Rim Light: Subtle edge highlight */}
+                <pointLight position={[0, 5, -10]} intensity={1} color="#3a6a75" />
+
+                {/* 5. Flash accent: Occasional bright spot */}
+                <pointLight position={[-8, 3, 3]} intensity={0.8} color="#5a8a95" />
 
                 <CloudScene />
-
-                {/* 
-                   Optimization: Removed Bloom/EffectComposer to allow concurrent rendering 
-                   with the heavy DemoSection zoom.
-                */}
             </Canvas>
         </div>
     );

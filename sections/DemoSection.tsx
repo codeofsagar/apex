@@ -37,6 +37,7 @@ export default function DemoSection({ children }: DemoSectionProps) {
                 scale: 2.0,
                 ease: "none",
                 force3D: true,
+                immediateRender: false, // Prevent recording start value at scale: 1
                 scrollTrigger: {
                     trigger: "#final-cta",
                     start: "top bottom",

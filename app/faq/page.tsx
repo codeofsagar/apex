@@ -1,6 +1,8 @@
 'use client';
 
 import CinematicLayout from '@/components/CinematicLayout';
+import ChromeText from '@/components/ui/ChromeText';
+import FadeIn from '@/components/ui/FadeIn';
 
 const faqs = [
     { q: "What makes this different from ChatGPT?", a: "ChatGPT is a generalist. Apex Companion AI is a specialist built to remember your specific context and drive execution, not just conversation." },
@@ -12,30 +14,44 @@ const faqs = [
 
 export default function FAQPage() {
     return (
-        <CinematicLayout>
-            <div className="max-w-4xl mx-auto text-center space-y-16 animate-fade-in-up">
-                <h1 className="text-5xl md:text-7xl font-bold text-apex drop-shadow-2xl">
-                    Frequent Questions
-                </h1>
+        <CinematicLayout
+            desktopImage="/op.png" // CHANGE THIS: "/faq-bg.png"
+            mobileImage="/mobop.png" // CHANGE THIS: "/faq-mobile.png"
+        >
+            <div className="max-w-4xl mx-auto text-center space-y-16">
+                <div className="w-full h-32 md:h-48 flex items-center justify-center mb-4">
+                    <ChromeText
+                        text="Frequent Questions"
+                        size={3}
+                        mobileSize={1.5}
+                        height={0.5}
+                        autoFit={true}
+                        letterSpacing={0.05}
+                        envMapIntensity={1}
+                        className="w-full h-full"
+                    />
+                </div>
 
                 <div className="space-y-6 text-left">
                     {faqs.map((item, idx) => (
-                        <div key={idx} className="p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group">
-                            <h3 className="text-xl md:text-2xl text-apex font-bold mb-2 group-hover:text-white transition-colors">
-                                {item.q}
-                            </h3>
-                            <p className="text-gray-400 font-light leading-relaxed">
-                                {item.a}
-                            </p>
-                        </div>
+                        <FadeIn key={idx} delay={idx * 0.1}>
+                            <div className="p-8 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group hover:scale-[1.02] duration-300">
+                                <h3 className="text-xl md:text-2xl text-apex font-bold mb-2 group-hover:text-white transition-colors">
+                                    {item.q}
+                                </h3>
+                                <p className="text-apex opacity-80 font-light leading-relaxed">
+                                    {item.a}
+                                </p>
+                            </div>
+                        </FadeIn>
                     ))}
                 </div>
 
-                <div className="pt-8">
+                <FadeIn delay={0.6} className="pt-8">
                     <button className="mystic-button">
                         Request Access
                     </button>
-                </div>
+                </FadeIn>
             </div>
         </CinematicLayout>
     );

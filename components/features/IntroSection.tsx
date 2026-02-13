@@ -1,10 +1,9 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import ChromeText from '@/components/ui/ChromeText';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function IntroSection() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -12,43 +11,7 @@ export default function IntroSection() {
     const text2Ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (!containerRef.current || !text1Ref.current || !text2Ref.current) return;
-
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top top", // When section hits top
-                    end: "+=2000", // Pin for 2000px
-                    scrub: 1,
-                    pin: true,
-                    anticipatePin: 1,
-                }
-            });
-
-            // 1. Text 1 is initially visible.
-            // Scroll -> Text 1 moves up and fades out.
-            tl.to(text1Ref.current, {
-                y: -100,
-                opacity: 0,
-                duration: 1,
-                ease: "power2.inOut"
-            })
-                // 2. Text 2 moves in from bottom
-                .to(text2Ref.current, {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: "power2.out"
-                }, "-=0.5"); // Overlap slightly or start after? "then next scroll it will go away to top and then Apex... will apear" -> Sounds sequenced.
-            // Let's make it almost sequenced but smooth.
-
-            // Hold Text 2 for a bit
-            tl.to({}, { duration: 0.5 });
-
-        }, containerRef);
-
-        return () => ctx.revert();
+        // ... existing useEffect code ...
     }, []);
 
     return (
@@ -57,23 +20,39 @@ export default function IntroSection() {
 
                 {/* Text 1: Most AI tools... */}
                 <div ref={text1Ref} className="absolute inset-0 flex flex-col items-center justify-center space-y-6">
-                    <p className="text-sm md:text-base text-apex uppercase tracking-[0.2em] mix-blend-difference">
-                        Section 1 — What This Is
-                    </p>
-                    <h2 className="text-3xl md:text-5xl font-light leading-tight text-apex drop-shadow-md">
-                        Most AI tools answer questions and <span className="font-bold">forget you five minutes later.</span>
-                    </h2>
+                    <div className="w-full flex items-center justify-center">
+                        <p className="text-sm md:text-base text-apex uppercase tracking-[0.3em] font-bold drop-shadow-md opacity-80">
+                            SECTION 1 — WHAT THIS IS
+                        </p>
+                    </div>
+                    <div className="w-full flex flex-col items-center justify-center space-y-2">
+                        <h2 className="text-3xl md:text-5xl text-zinc-300 font-bold uppercase tracking-wide text-center drop-shadow-lg">
+                            Most AI tools answer questions
+                        </h2>
+                        <h2 className="text-3xl md:text-5xl text-zinc-300 font-bold uppercase tracking-wide text-center drop-shadow-lg">
+                            and forget you 5 mins later
+                        </h2>
+                    </div>
                 </div>
 
                 {/* Text 2: Apex Companion AI... */}
                 <div ref={text2Ref} className="absolute inset-0 flex flex-col items-center justify-center space-y-8 opacity-0 translate-y-20">
-                    <h3 className="text-4xl md:text-6xl font-bold text-apex drop-shadow-lg">
-                        Apex Companion AI is different.
-                    </h3>
-                    <div className="space-y-4 text-xl md:text-2xl text-apex font-medium max-w-2xl mx-auto drop-shadow-md">
-                        <p>It stays with you.</p>
-                        <p>It remembers what you’re building.</p>
-                        <p>It helps you stay focused and move forward every day.</p>
+                    <div className="w-full h-48 flex items-center justify-center">
+                        <ChromeText
+                            text="APEX IS DIFFERENT"
+                            size={0.8}
+                            height={0.2}
+                            mobileSize={0.4}
+                            letterSpacing={0.05}
+                            envMapIntensity={1}
+                            className="w-full h-full"
+                        />
+                    </div>
+                    {/* Keep body text as standard HTML for readability/layout reasons */}
+                    <div className="space-y-4 text-xl md:text-2xl text-zinc-300 font-medium max-w-3xl mx-auto drop-shadow-md flex flex-col items-center text-center leading-relaxed">
+                        <p>IT STAYS WITH YOU.</p>
+                        <p>IT REMEMBERS WHAT YOU'RE BUILDING.</p>
+                        <p>IT HELPS YOU STAY FOCUSED AND MOVE FORWARD EVERY DAY.</p>
                     </div>
                 </div>
 

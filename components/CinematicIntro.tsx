@@ -29,6 +29,9 @@ export default function CinematicIntro({ onComplete }: { onComplete: () => void 
     };
 
     useEffect(() => {
+        // Safety timeout: Ensure button appears even if animation hangs
+        const timer = setTimeout(() => setShowButton(true), 8000);
+
         // Animate text staggering in
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
@@ -48,45 +51,52 @@ export default function CinematicIntro({ onComplete }: { onComplete: () => void 
             );
         }, containerRef);
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert();
+            clearTimeout(timer);
+        };
     }, []);
 
     return (
         <div ref={containerRef} className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center overflow-hidden">
             {/* Background Orb/Video */}
             <div className="absolute inset-0 z-0">
-                {/* Desktop Video - Muted removed for sound */}
+                {/* Desktop Video - Muted added for autoplay reliability */}
                 <video
                     autoPlay
                     loop
+                    muted
                     playsInline
-                    className="hidden md:block w-full h-full object-cover opacity-60 mix-blend-screen scale-110"
+                    className="hidden md:block w-full h-full object-cover opacity-90 mix-blend-screen scale-110"
                 >
-                    <source src="/intro.mp4" type="video/mp4" />
+                    <source src="/in.mp4" type="video/mp4" />
                 </video>
 
                 {/* Mobile Video */}
                 <video
                     autoPlay
                     loop
+                    muted
                     playsInline
                     className="block md:hidden w-full h-full object-cover opacity-60 mix-blend-screen scale-110"
                 >
-                    <source src="/mobintro.mp4" type="video/mp4" />
+                    <source src="/in.mp4" type="video/mp4" />
                 </video>
 
                 {/* Fallback/Overlay */}
-                <div className="absolute inset-0 bg-black/60" />
+
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 flex flex-col items-center justify-center w-full h-full p-6 text-center space-y-16">
+            <div className="relative z-10 flex flex-col items-center justify-center w-full h-full p-6 text-center space-y-8">
 
-                <div className="flex flex-col items-center gap-2 md:gap-4">
+                <div className="flex flex-col items-center gap-4 w-full max-w-4xl mx-auto">
                     {sequence.map((line, index) => (
-                        <h2 key={index} className="intro-line text-xl md:text-3xl lg:text-5xl font-bold text-apex tracking-widest drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] opacity-0">
-                            {line}
-                        </h2>
+                        <div key={index} className="intro-line opacity-0 w-full flex items-center justify-center">
+                            <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold text-zinc-300 uppercase tracking-tight drop-shadow-lg text-center">
+                                {line}
+                            </h2>
+                        </div>
                     ))}
                 </div>
 
