@@ -15,6 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const heroBgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -42,6 +43,19 @@ export default function Hero() {
           scrub: true
         }
       });
+
+      // Cinematic auto-zoom (Ken Burns effect) on the hero background
+      gsap.fromTo(
+        heroBgRef.current,
+        { scale: 1 },
+        {
+          scale: 1.15,
+          duration: 12,
+          ease: "power1.inOut",
+          repeat: -1,
+          yoyo: true,
+        }
+      );
 
     }, sectionRef);
 
@@ -76,7 +90,7 @@ export default function Hero() {
       </div>
 
       {/* Background Image - z-10 (above clouds) */}
-      <div className="hero-bg fixed inset-0 z-10 pointer-events-none w-full h-full">
+      <div ref={heroBgRef} className="hero-bg fixed inset-0 z-10 pointer-events-none w-full h-full will-change-transform">
         {/* Desktop Background */}
         <Image
           src="/ok.png"

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
-import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -57,23 +56,8 @@ export default function DemoSection({ children }: DemoSectionProps) {
                 <div className="absolute inset-0 z-10" /> {/* Overlay for text readability */}
 
                 {/* Scalable Inner Wrapper */}
-                <div ref={bgRef} className="relative w-full h-full will-change-transform">
-                    {/* Desktop Demo */}
-                    <Image
-                        src="/demo.png"
-                        alt="Apex Companion Demo Desktop"
-                        fill
-                        className="hidden md:block object-cover"
-                    />
+                <div ref={bgRef} className="relative w-full h-full will-change-transform" />
 
-                    {/* Mobile Demo */}
-                    <Image
-                        src="/mobdemo.png"
-                        alt="Apex Companion Demo Mobile"
-                        fill
-                        className="block md:hidden object-cover"
-                    />
-                </div>
             </div>
 
             {/* Scrolling Content - z-10 to be above image */}
