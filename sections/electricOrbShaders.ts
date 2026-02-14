@@ -26,6 +26,7 @@ export const noiseHelperFunctions = `
 `;
 
 export const electricVertexShader = `
+  precision highp float;
   uniform float time; uniform vec2 mouse; uniform float mouseInfluence;
   uniform float electricIntensity; uniform float arcFrequency; uniform vec3 themeColors[5];
   varying vec3 vPosition; varying vec3 vNormal; varying float vIntensity; varying float vDistFromMouse; varying vec2 vUv;
@@ -71,6 +72,7 @@ export const electricVertexShader = `
 `;
 
 export const electricFragmentShader = `
+  precision highp float;
   uniform float time; uniform float mouseInfluence; uniform float electricIntensity;
   uniform float glowStrength; uniform float arcFrequency; uniform vec3 themeColors[5];
   varying vec3 vPosition; varying vec3 vNormal; varying float vIntensity; varying float vDistFromMouse; varying vec2 vUv;
