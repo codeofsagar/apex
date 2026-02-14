@@ -39,7 +39,7 @@ export default function MemoryEngine() {
                     <ChromeText
                         text="IT DOESN'T RESET"
                         className="w-full h-full relative z-10"
-                        size={1.9}
+                        size={2.3}
                         mobileSize={1.6}
                         height={0.6}
                         bevelSize={0.03}

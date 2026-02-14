@@ -21,16 +21,26 @@ export default function FeaturesPage() {
         >
             <div className="max-w-7xl mx-auto px-4 pb-24">
                 <div className="mb-24 text-center md:text-left border-b border-white/10 pb-8">
-                    <div className="w-full h-32 md:h-48 flex items-center justify-start mb-8">
+                    <div className="w-full h-32 md:h-48 flex items-center justify-start mb-8 flex-col">
                         <ChromeText
-                            text="The Behavioral Operating System"
-                            size={2}
-                            mobileSize={1}
+                            text="The Behavioral"
+                            size={2.3}
+                            mobileSize={1.6}
                             height={0.5}
                             autoFit={false}
                             letterSpacing={0.02}
                             envMapIntensity={1}
                             className="w-full h-full"
+                        />
+                        <ChromeText
+                            text="Operating System"
+                            size={2.3}
+                            mobileSize={1.6}
+                            height={0.5}
+                            autoFit={false}
+                            letterSpacing={0.02}
+                            envMapIntensity={1}
+                            className="w-full h-full bottom-20 relative"
                         />
                     </div>
                     <FadeIn delay={0.2}>

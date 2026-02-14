@@ -20,16 +20,27 @@ export default function JournalPage() {
         >
             <div className="max-w-4xl mx-auto px-4 pb-24 text-center">
                 <div className="mb-20 border-b border-white/10 pb-12">
-                    <div className="w-full h-32 md:h-48 flex items-center justify-center mb-8">
+                    <div className="w-full h-32 md:h-48 flex flex-col items-center justify-center mb-8">
                         <ChromeText
-                            text="Your Behavioral Archive"
+                            text="Your Behavioral"
                             size={3}
-                            mobileSize={1.5}
+                            mobileSize={1.7}
                             height={0.5}
                             autoFit={true}
                             letterSpacing={0.02}
                             envMapIntensity={1}
                             className="w-full h-full"
+                        />
+                 
+                        <ChromeText
+                            text="Archive"
+                            size={3}
+                            mobileSize={1.7}
+                            height={0.5}
+                            autoFit={true}
+                            letterSpacing={0.02}
+                            envMapIntensity={1}
+                            className="w-full h-full relative bottom-20 md:bottom-10"
                         />
                     </div>
                 </div>

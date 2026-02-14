@@ -62,7 +62,7 @@ export default function IdentityLayer() {
                         <ChromeText
                             text="KNOW YOUR PATTERN"
                             className="w-full h-full relative z-10"
-                            size={2.2}
+                            size={2.7}
                             mobileSize={1.8}
                             height={0.5}
                             bevelSize={0.02}

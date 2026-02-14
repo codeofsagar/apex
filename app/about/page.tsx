@@ -15,7 +15,7 @@ export default function AboutPage() {
                     <ChromeText
                         text="Why This Exists"
                         size={3}
-                        mobileSize={1.5}
+                        mobileSize={2.7}
                         height={0.5}
                         autoFit={true}
                         letterSpacing={0.05}

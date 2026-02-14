@@ -18,16 +18,26 @@ export default function CrisisControlPage() {
             mobileImage="/conmob.png"
         >
             <div className="max-w-4xl mx-auto px-4 pb-24 text-center">
-                <div className="w-full h-32 md:h-48 flex items-center justify-center mb-16 border-b border-red-900/30 pb-8">
+                <div className="w-full h-32 md:h-48 flex flex-col items-center justify-center mb-16 border-b border-red-900/30 pb-8">
                     <ChromeText
-                        text="Stability Under Pressure"
+                        text="Stability Under"
                         size={2.5}
-                        mobileSize={1.2}
+                        mobileSize={2.2}
                         height={0.5}
                         autoFit={true}
                         letterSpacing={0.02}
                         envMapIntensity={1}
                         className="w-full h-full"
+                    />
+                    <ChromeText
+                        text="Pressure"
+                        size={2.5}
+                        mobileSize={2.2}
+                        height={0.5}
+                        autoFit={true}
+                        letterSpacing={0.02}
+                        envMapIntensity={1}
+                        className="w-full h-full relative bottom-14 md:bottom-20"
                     />
                 </div>
 

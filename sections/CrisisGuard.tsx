@@ -49,12 +49,24 @@ export default function CrisisGuard() {
                     <div className="h-px w-16 bg-red-500/30" />
                 </div>
 
-                <div className="w-full h-32 md:h-48 mb-12 relative">
+                <div className="w-full h-32 md:h-48 mb-12 relative flex flex-col gap-0">
                     <ChromeText
-                        text="WHEN YOU SPIRAL IT STABILIZES"
+                        text="WHEN YOU SPIRAL"
                         className="w-full h-full relative z-10"
-                        size={1.6}
+                        size={1.9}
                         mobileSize={1.9}
+                        height={0.6}
+                        bevelSize={0.02}
+                        bevelThickness={0.05}
+                        letterSpacing={0.02}
+                        envMapIntensity={1.0}
+                        autoFit={true}
+                    />
+                    <ChromeText
+                        text="IT STABILIZES"
+                        className="w-full h-full relative z-10 bottom-20"
+                        size={1.9}
+                        mobileSize={1.5}
                         height={0.6}
                         bevelSize={0.02}
                         bevelThickness={0.05}

@@ -12,16 +12,26 @@ export default function HowItWorksPage() {
         >
             {/* Hero Section */}
             <div className="max-w-5xl mx-auto px-4 pb-24">
-                <div className="w-full h-32 md:h-48 flex items-center justify-center mb-16 border-b border-white/10 pb-8">
+                <div className="w-full flex-col h-32 md:h-48 flex items-center justify-center mb-16 border-b border-white/10 pb-8">
                     <ChromeText
-                        text="Five Layers of Behavioral Evolution"
-                        size={3}
-                        mobileSize={1.5}
+                        text="Five Layers of "
+                        size={3.3}
+                        mobileSize={2.5}
                         height={0.5}
                         autoFit={true}
                         letterSpacing={0.02}
                         envMapIntensity={1}
                         className="w-full h-full"
+                    />
+                    <ChromeText
+                        text="Behavioral Evolution"
+                        size={3.8}
+                        mobileSize={2.5}
+                        height={0.5}
+                        autoFit={true}
+                        letterSpacing={0.02}
+                        envMapIntensity={1}
+                        className="w-full h-full relative md:bottom-20 bottom-10"
                     />
                 </div>
 

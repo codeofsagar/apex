@@ -11,7 +11,7 @@ import ThreeClouds from './ThreeClouds';
 import CloudOverlay from '@/components/CloudOverlay';
 import ChromeText from '@/components/ui/ChromeText';
 import ElectricOrb from './ElectricOrb';
-import FadeIn from '@/components/ui/FadeIn';
+// import FadeIn from '@/components/ui/FadeIn';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -129,7 +129,7 @@ export default function Hero() {
             text="APEX COMPANION AI"
             className="w-full h-full relative z-10"
             size={2.3}
-            mobileSize={1}
+            mobileSize={1.1}
             height={1}
             bevelSize={0.04}
             bevelThickness={0.1}
@@ -148,26 +148,26 @@ export default function Hero() {
 
 
 
-        <div className="w-full flex flex-col items-center gap-8 mb-12 max-w-5xl mx-auto px-4 z-130">
+        <div className="w-full flex flex-col items-center gap-8 mb-12 max-w-5xl mx-auto px-4 relative z-[130] pointer-events-auto">
 
-        
 
-          <FadeIn delay={0.7} className="w-full">
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-none drop-shadow-2xl text-center">
+
+          <div className="w-full">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter leading-none drop-shadow-2xl text-center">
               The First AI That <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-white via-zinc-200 to-zinc-500">Actually Remembers You.</span>
             </h2>
-          </FadeIn>
+          </div>
 
-          <FadeIn delay={0.9} className="w-full max-w-3xl">
+          <div className="w-full max-w-3xl">
             <div className="flex flex-col items-center gap-6">
               <p className="text-lg md:text-xl text-white font-light leading-relaxed text-center border-l-2 border-amber-500/50 pl-6 pr-6 md:border-l-0 md:border-t md:pt-6 md:pl-0">
                 An adaptive behavioral intelligence system that tracks your goals, promises, and emotional patterns — <span className="text-white font-semibold">and refuses to let you drift.</span>
               </p>
             </div>
-          </FadeIn>
+          </div>
 
-          <FadeIn delay={1.1} className="flex flex-col md:flex-row gap-6 mt-8 w-full justify-center">
+          <div className="flex flex-col md:flex-row gap-6 mt-8 w-full justify-center">
             <Link href="/request-access" className="w-full md:w-auto">
               <button className="mystic-button text-lg px-8 py-4 w-full md:w-auto">
                 ENTER THE SYSTEM
@@ -179,7 +179,7 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-amber-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </button>
             </Link>
-          </FadeIn>
+          </div>
         </div>
       </div>
     </section >

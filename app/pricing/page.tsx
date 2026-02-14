@@ -16,21 +16,44 @@ export default function PricingPage() {
             desktopImage="/pri.png"
             mobileImage="/primob.png"
         >
-            <div className="max-w-7xl mx-auto px-4 py-24 flex flex-col items-center">
-                <div className="w-full h-32 md:h-48 flex items-center justify-center mb-16">
-                    <ChromeText
-                        text="Choose Your Level of Accountability"
-                        size={3}
-                        mobileSize={1.5}
-                        height={0.5}
-                        autoFit={true}
-                        letterSpacing={0.05}
-                        envMapIntensity={1}
-                        className="w-full h-full"
-                    />
+            <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col items-center">
+                <div className="w-full h-32 md:h-48 flex items-center justify-center mb-6">
+                    <div className="flex flex-col items-center">
+                        <ChromeText
+                            text="Choose"
+                            size={6}
+                            mobileSize={2}
+                            height={0.8}
+                            autoFit={true}
+                            letterSpacing={0.05}
+                            envMapIntensity={1}
+                            className="w-full h-full relative z-10  top-24 md:top-16"
+                        />
+                        <ChromeText
+                            text="Your Level"
+                            size={5.7}
+                            mobileSize={2}
+                            height={0.8}
+                            autoFit={true}
+                            letterSpacing={0.05}
+                            envMapIntensity={1}
+                            className="w-full h-full relative z-10"
+                        />
+                        <ChromeText
+                            text="of Accountability"
+                            size={3}
+                            mobileSize={2}
+                            height={0.8}
+                            autoFit={true}
+                            letterSpacing={0.05}
+                            envMapIntensity={1}
+                            className="w-full h-full relative z-10 bottom-24 md:bottom-20"
+                        />
+                    </div>
                 </div>
 
-                <div className="w-full max-w-6xl mx-auto overflow-hidden border border-white/10 rounded-lg bg-black/40 backdrop-blur-md">
+                {/* Desktop Table Layout */}
+                <div className="hidden md:block w-full max-w-6xl mx-auto border border-white/10 rounded-lg bg-black/40 backdrop-blur-md overflow-hidden">
                     {/* Header Row */}
                     <div className="grid grid-cols-4 bg-white/5 border-b border-white/10 p-4 font-mono text-xs tracking-widest text-zinc-500 uppercase">
                         <div className="col-span-1">Metric</div>
@@ -100,6 +123,35 @@ export default function PricingPage() {
                             </div>
                         ))}
                     </div>
+                </div>
+
+                {/* Mobile Cards Layout */}
+                <div className="md:hidden w-full flex flex-col gap-6">
+                    {tiers.map((tier, idx) => (
+                        <div key={idx} className={`relative p-6 rounded-xl border ${tier.highlight ? 'border-amber-500/50 bg-amber-950/10' : 'border-white/10 bg-black/40'} backdrop-blur-md`}>
+                            <h3 className={`text-xl font-bold mb-2 ${tier.highlight ? 'text-amber-500' : 'text-white'}`}>{tier.name}</h3>
+                            <div className="text-3xl font-mono font-black text-white mb-6">
+                                {tier.price}<span className="text-sm text-zinc-500 font-normal">/MO</span>
+                            </div>
+
+                            <ul className="space-y-3 mb-8">
+                                {tier.features.map((feature, fIdx) => (
+                                    <li key={fIdx} className="flex items-start gap-3 text-sm text-zinc-300">
+                                        <span className="text-amber-500 text-xs mt-1">▶</span>
+                                        {feature}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <button className={`w-full py-3 text-xs font-bold uppercase tracking-widest border transition-all duration-300
+                                ${tier.highlight
+                                    ? 'bg-amber-500 text-black border-amber-500 hover:bg-amber-400'
+                                    : 'bg-transparent text-zinc-500 border-zinc-700 hover:border-white hover:text-white'}
+                            `}>
+                                {tier.highlight ? 'Initialize' : 'Select'}
+                            </button>
+                        </div>
+                    ))}
                 </div>
             </div>
         </CinematicLayout>

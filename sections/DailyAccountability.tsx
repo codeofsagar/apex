@@ -54,7 +54,7 @@ export default function DailyAccountability() {
                         <ChromeText
                             text="DAILY CHECK-IN LOOP"
                             className="w-full h-full relative z-10"
-                            size={1.7}
+                            size={1.9}
                             mobileSize={1.4}
                             height={0.5}
                             bevelSize={0.02}

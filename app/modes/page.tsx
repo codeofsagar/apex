@@ -35,16 +35,26 @@ export default function ModesPage() {
             mobileImage="/modmobile.png"
         >
             <div className="max-w-7xl mx-auto px-4 pb-24">
-                <div className="w-full h-40 md:h-56 flex items-center justify-center mb-16 border-b border-white/10 pb-8">
+                <div className="w-full h-40 md:h-56 flex items-center flex-col justify-center mb-16 border-b border-white/10 pb-8">
                     <ChromeText
-                        text="Three Personalities. One Intelligence."
-                        size={2.5}
-                        mobileSize={1.2}
+                        text="Three Personalities."
+                        size={2.7}
+                        mobileSize={1.5}
                         height={0.5}
                         autoFit={true}
                         letterSpacing={0.02}
                         envMapIntensity={1.2}
                         className="w-full h-full"
+                    />
+                    <ChromeText
+                        text="One Intelligence."
+                        size={2.5}
+                        mobileSize={1.5}
+                        height={0.5}
+                        autoFit={true}
+                        letterSpacing={0.02}
+                        envMapIntensity={1.2}
+                        className="w-full h-full relative bottom-20 md:bottom-10"
                     />
                 </div>
 

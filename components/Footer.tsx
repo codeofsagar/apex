@@ -53,7 +53,7 @@ export default function Footer() {
                     <ChromeText
                         text="Apex Companion"
                         size={5}
-                        mobileSize={2.5}
+                        mobileSize={3.5}
                         height={0.5}
                         bevelSize={0.04}
                         bevelThickness={0.1}

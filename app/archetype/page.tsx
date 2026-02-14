@@ -20,16 +20,26 @@ export default function ArchetypePage() {
         >
             <div className="max-w-4xl mx-auto px-4 pb-24 text-center">
                 <div className="mb-20 border-b border-white/10 pb-12">
-                    <div className="w-full h-32 md:h-48 flex items-center justify-center mb-8">
+                    <div className="w-full h-32 md:h-48 flex items-center justify-center mb-8 flex-col">
                         <ChromeText
-                            text="Decode Your Operating Pattern"
+                            text="Decode Your "
                             size={2.5}
-                            mobileSize={1.2}
+                            mobileSize={1.9}
                             height={0.5}
                             autoFit={true}
                             letterSpacing={0.02}
                             envMapIntensity={1}
                             className="w-full h-full"
+                        />
+                        <ChromeText
+                            text="Operating Pattern"
+                            size={2.5}
+                            mobileSize={1.9}
+                            height={0.5}
+                            autoFit={true}
+                            letterSpacing={0.02}
+                            envMapIntensity={1}
+                            className="w-full h-full relative bottom-20 md:bottom-20"
                         />
                     </div>
                 </div>

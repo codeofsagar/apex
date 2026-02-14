@@ -14,8 +14,8 @@ export default function ContactPage() {
                 <div className="w-full h-32 md:h-48 flex items-center justify-center mb-8 border-b border-white/10 pb-8">
                     <ChromeText
                         text="Contact Command"
-                        size={3}
-                        mobileSize={1.5}
+                        size={3.8}
+                        mobileSize={3}
                         height={0.5}
                         autoFit={true}
                         letterSpacing={0.05}

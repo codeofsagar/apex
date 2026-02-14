@@ -57,7 +57,7 @@ export default function ChooseYourMode() {
                     <ChromeText
                         text="CHOOSE YOUR MODE"
                         className="w-full h-full relative z-10"
-                        size={2.3}
+                        size={2.6}
                         mobileSize={1.5}
                         height={0.5}
                         bevelSize={0.02}
