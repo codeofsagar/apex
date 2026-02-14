@@ -29,7 +29,7 @@ export default function RainEffect() {
         let splashes: Splash[] = [];
         let lightningBolts: LightningBolt[] = [];
 
-        const dropCount = 1200;
+        const dropCount = 450;
         const textString = "APEX"; // Modified to match site brand
 
         // ======================================================
@@ -51,7 +51,7 @@ export default function RainEffect() {
             hitCanvas.width = width;
             hitCanvas.height = height;
             cloudCanvas.width = width;
-            cloudCanvas.height = Math.floor(height * 0.6);
+            cloudCanvas.height = Math.floor(height * 0.4);
             drawCollisionMap();
         }
 
@@ -81,7 +81,7 @@ export default function RainEffect() {
             constructor() {
                 this.segments = [];
                 this.life = 1.0;
-                this.brightness = Math.random() * 0.5 + 0.5;
+                this.brightness = Math.random() * 0.3 + 0.35;
                 this.generateBolt();
             }
 
@@ -150,7 +150,7 @@ export default function RainEffect() {
 
                 this.segments.forEach(seg => {
                     // Outer glow
-                    ctx.strokeStyle = 'rgba(90, 125, 133, 0.3)';
+                    ctx.strokeStyle = `rgba(200, 230, 255, 0.3)`;
                     ctx.lineWidth = seg.width * 10;
                     ctx.beginPath();
                     ctx.moveTo(seg.x1, seg.y1);
@@ -158,7 +158,7 @@ export default function RainEffect() {
                     ctx.stroke();
 
                     // Core
-                    ctx.strokeStyle = 'rgba(180, 210, 215, 1)';
+                    ctx.strokeStyle = `rgba(255, 255, 255, 1)`;
                     ctx.lineWidth = seg.width * 1.5;
                     ctx.beginPath();
                     ctx.moveTo(seg.x1, seg.y1);
@@ -205,7 +205,7 @@ export default function RainEffect() {
             }
             draw() {
                 if (!ctx) return;
-                ctx.fillStyle = `rgba(90, 125, 133, ${this.life})`;
+                ctx.fillStyle = `rgba(200, 230, 255, ${this.life})`;
                 ctx.fillRect(this.x, this.y, this.size, this.size);
             }
         }
@@ -237,9 +237,9 @@ export default function RainEffect() {
                 this.x = Math.random() * width - height * 0.3 * rainVelocityX;
                 this.y = -20;
 
-                const baseSpeed = Math.random() * 15 + 10;
+                const baseSpeed = Math.random() * 5 + 12; // Reduced variance and max speed (12-17)
                 this.vy = baseSpeed * rainVelocityY;
-                this.baseVx = baseSpeed * rainVelocityX; // Base diagonal velocity
+                this.baseVx = baseSpeed * rainVelocityX;
                 this.vx = this.baseVx;
 
                 this.state = 'falling';
@@ -317,13 +317,14 @@ export default function RainEffect() {
                         // Falling diagonally
                         this.y = nextY;
                         this.x = nextX;
-                        if (this.vy < 25 * rainVelocityY) this.vy += 0.5 * rainVelocityY;
+                        if (this.vy < 20 * rainVelocityY) this.vy += 0.1 * rainVelocityY;
                     }
                 } else {
                     // Free fall - diagonal movement
                     this.y = nextY;
                     this.x = nextX;
-                    if (this.vy < 25 * rainVelocityY) this.vy += 0.5 * rainVelocityY;
+                    // Capped terminal velocity to prevent "too fast" look
+                    if (this.vy < 20 * rainVelocityY) this.vy += 0.1 * rainVelocityY;
                 }
 
                 if (this.y > height || this.x > width + 100) this.reset();
@@ -336,9 +337,8 @@ export default function RainEffect() {
 
                 if (this.state === 'falling') {
                     // Draw diagonal rain streak
-                    ctx.fillStyle = `rgba(90, 125, 133, ${opacity})`;
+                    ctx.fillStyle = `rgba(200, 230, 255, ${opacity})`;
 
-                    // Unused: const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
                     const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
                     const len = speed * (this.z + 1.2);
                     const angle = Math.atan2(this.vy, this.vx);
@@ -354,9 +354,9 @@ export default function RainEffect() {
                     if (stretch < this.size) stretch = this.size;
 
                     let grad = ctx.createLinearGradient(this.x, this.y - stretch, this.x, this.y);
-                    grad.addColorStop(0, `rgba(68, 96, 101, 0)`);
-                    grad.addColorStop(0.5, `rgba(90, 125, 133, 0.08)`);
-                    grad.addColorStop(1, `rgba(140, 180, 185, 0.35)`);
+                    grad.addColorStop(0, `rgba(200, 230, 255, 0)`);
+                    grad.addColorStop(0.5, `rgba(200, 230, 255, 0.2)`);
+                    grad.addColorStop(1, `rgba(220, 240, 255, 0.6)`);
 
                     ctx.fillStyle = grad;
                     ctx.beginPath();
@@ -366,12 +366,12 @@ export default function RainEffect() {
                     ctx.fill();
 
                     ctx.beginPath();
-                    ctx.fillStyle = `rgba(90, 125, 133, 0.2)`;
+                    ctx.fillStyle = `rgba(200, 230, 255, 0.3)`;
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
 
                     ctx.beginPath();
-                    ctx.fillStyle = `rgba(140, 180, 185, 0.9)`;
+                    ctx.fillStyle = `rgba(255, 255, 255, 0.9)`;
                     ctx.arc(this.x - (this.size * 0.3), this.y - (this.size * 0.3), this.size * 0.35, 0, Math.PI * 2);
                     ctx.fill();
                 }

@@ -7,13 +7,14 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     const navLinks = [
-        { name: "How It Works", path: "/how-it-works" },
         { name: "Features", path: "/features" },
-        { name: "Use Cases", path: "/use-cases" },
+        { name: "How It Works", path: "/how-it-works" },
+        { name: "Modes", path: "/modes" },
+        { name: "Journal", path: "/journal" },
+        { name: "Archetype", path: "/archetype" },
+        { name: "Crisis Control", path: "/crisis-control" },
         { name: "Pricing", path: "/pricing" },
         { name: "About", path: "/about" },
-        { name: "Roadmap", path: "/roadmap" },
-        { name: "FAQ", path: "/faq" },
         { name: "Contact", path: "/contact" },
     ];
 

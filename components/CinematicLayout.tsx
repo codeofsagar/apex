@@ -5,6 +5,8 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import ThreeClouds from '@/sections/ThreeClouds';
 import LightningOverlay from '@/sections/LightningOverlay';
+import RainEffect from '@/sections/RainEffect';
+import CloudOverlay from '@/components/CloudOverlay';
 
 interface CinematicLayoutProps {
     children: React.ReactNode;
@@ -36,27 +38,20 @@ export default function CinematicLayout({
     }, []);
 
     return (
-        <main className="relative min-h-screen w-full overflow-hidden bg-black text-white selection:bg-amber-500/30">
-            {/* Orb Video - Fixed Top Center (Same as Hero) */}
-            <div className="orb-container fixed md:ml-6 ml-3 top-70 md:top-40 left-1/2 -translate-x-1/2 z-[0] pointer-events-none mix-blend-screen opacity-60">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="orb-video md:w-[500px] w-[800px] scale-250 md:scale-100 h-auto object-cover blur-md contrast-125"
-                >
-                    <source src="/orb.mp4" type="video/mp4" />
-                </video>
-            </div>
+        <main className="relative min-h-screen w-full overflow-hidden  text-white selection:bg-amber-500/30">
+
 
             {/* 3D Cloud Animation Layer - z-0 */}
-            <div id="cloud-layer" className="fixed inset-0 z-0 scale-150 pointer-events-none">
+            <div id="cloud-layer" className="fixed inset-0 z-0 scale-100 pointer-events-none">
                 <ThreeClouds />
-                <LightningOverlay />
             </div>
 
-            {/* Background Image Layer with Zoom */}
+            {/* Rain Effect - z-1 (Behind Background Image) */}
+            <div className="fixed inset-0 z-1 pointer-events-none">
+                <RainEffect />
+            </div>
+
+            {/* Background Image Layer with Zoom - z-10 */}
             <div className="fixed inset-0 z-10 pointer-events-none w-full h-full">
                 <div ref={bgRef} className="relative w-full h-full will-change-transform">
                     {/* Desktop Background */}
@@ -76,6 +71,11 @@ export default function CinematicLayout({
                         priority
                     />
                 </div>
+            </div>
+
+            {/* Cloud Overlay - z-20 */}
+            <div className="fixed inset-0 z-20 pointer-events-none">
+                <CloudOverlay />
             </div>
 
             {/* Static Gradient Overlay for Text Readability - z-15 */}

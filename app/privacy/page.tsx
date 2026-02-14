@@ -1,16 +1,29 @@
 'use client';
 
 import CinematicLayout from '@/components/CinematicLayout';
+import ChromeText from '@/components/ui/ChromeText';
 
 export default function PrivacyPage() {
     return (
-        <CinematicLayout>
+        <CinematicLayout
+            desktopImage="/featuresdesktop.png"
+            mobileImage="/featuremob.png"
+        >
             <div className="max-w-4xl mx-auto text-left space-y-12 animate-fade-in-up">
-                <div className="text-center">
-                    <h1 className="text-5xl md:text-7xl font-bold text-apex drop-shadow-2xl">
-                        Privacy Policy
-                    </h1>
-                    <p className="text-gray-400 mt-4">Last Updated: October 2025</p>
+                <div className="text-center mb-12">
+                    <div className="w-full h-32 md:h-48 flex items-center justify-center mb-4">
+                        <ChromeText
+                            text="Privacy Policy"
+                            size={2.5}
+                            mobileSize={1.2}
+                            height={0.5}
+                            autoFit={true}
+                            letterSpacing={0.05}
+                            envMapIntensity={1}
+                            className="w-full h-full"
+                        />
+                    </div>
+                    <p className="text-gray-400">Last Updated: October 2025</p>
                 </div>
 
                 <div className="space-y-8 text-gray-300 leading-relaxed font-light">

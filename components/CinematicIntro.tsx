@@ -58,7 +58,7 @@ export default function CinematicIntro({ onComplete }: { onComplete: () => void 
     }, []);
 
     return (
-        <div ref={containerRef} className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center overflow-hidden">
+        <div ref={containerRef} className="fixed inset-0 z-200 bg-black flex flex-col items-center justify-center overflow-hidden">
             {/* Background Orb/Video */}
             <div className="absolute inset-0 z-0">
                 {/* Desktop Video - Muted added for autoplay reliability */}

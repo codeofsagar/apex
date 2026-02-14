@@ -10,6 +10,8 @@ import RainEffect from './RainEffect';
 import ThreeClouds from './ThreeClouds';
 import CloudOverlay from '@/components/CloudOverlay';
 import ChromeText from '@/components/ui/ChromeText';
+import ElectricOrb from './ElectricOrb';
+import FadeIn from '@/components/ui/FadeIn';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,6 +33,16 @@ export default function Hero() {
         y: -50,
         pointerEvents: "none",
         ease: "power1.out"
+      });
+
+      // Entry Animation
+      gsap.from(".hero-content > *", {
+        y: 50,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power2.out",
+        delay: 0.5
       });
 
       // Parallax for Background
@@ -66,22 +78,20 @@ export default function Hero() {
     <section ref={sectionRef} className="relative h-screen w-full overflow-hidden">
       <Navbar />
 
-      {/* Orb Video - Fixed Top Center */}
-      <div className="orb-container fixed md:ml-6 ml-3 top-70 md:top-0 left-1/2 -translate-x-1/2 z-[100] pointer-events-none mix-blend-screen">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="orb-video md:w-[500px] w-[800px] scale-250 md:scale-100 h-auto object-cover brightness-150 contrast-225"
-        >
-          <source src="/orb.mp4" type="video/mp4" />
-        </video>
+      {/* Electric Orb - Three.js Effect */}
+      <div className="fixed left-0 top-0 md:-top-24 w-full flex justify-center z-[100] pointer-events-none">
+        <div className="w-[400px] h-[400px] md:w-[450px] md:h-[450px]">
+          <ElectricOrb />
+        </div>
       </div>
 
       {/* Cloud + Rain Layer - z-0 (below background) */}
       <div id="cloud-layer" className="fixed inset-0 z-0 scale-100 pointer-events-none">
         <ThreeClouds />
+      </div>
+
+      {/* Rain Effect - z-1 (Behind Background Image) */}
+      <div className="fixed inset-0 z-1 pointer-events-none">
         <RainEffect />
       </div>
 
@@ -101,13 +111,19 @@ export default function Hero() {
           priority
         />
         {/* Mobile Background */}
-
+        <Image
+          src="/mobok.png"
+          alt="Background Mobile"
+          fill
+          className="hero-bg-img block md:hidden object-cover"
+          priority
+        />
       </div>
 
-      <div className="hero-content fixed inset-0 z-[120] flex flex-col items-center justify-center h-full text-center px-4 pointer-events-none">
-        <div className="w-full h-[20vh] md:h-[30vh] flex items-center justify-center mb-28 md:mb-12 relative">
+      <div className="hero-content fixed inset-0 z-[120] flex flex-col items-center justify-center md:top-10 h-full text-center px-4 pointer-events-none">
+        <div className="w-full h-[20vh] md:h-[30vh] flex items-center justify-center mb-8 md:mb-1  relative">
           {/* Subtle dark overlay for contrast */}
-          <div className="absolute inset-0 bg-radial-gradient from-black/60 via-transparent to-transparent opacity-80 pointer-events-none scale-150" />
+          <div className="absolute inset-0 bg-radial-gradient from-black/90 via-transparent to-transparent opacity-100 pointer-events-none scale-150" />
 
           <ChromeText
             text="APEX COMPANION AI"
@@ -132,24 +148,40 @@ export default function Hero() {
 
 
 
-        <div className="w-full flex items-center justify-center mt-4 mb-4">
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-zinc-300 uppercase tracking-tight drop-shadow-lg text-center">
-            AI THAT EXECUTES, NOT CHATS.
-          </h2>
-        </div>
+        <div className="w-full flex flex-col items-center gap-8 mb-12 max-w-5xl mx-auto px-4 z-130">
 
-        <div className="w-full flex flex-col items-center gap-2 mb-12 max-w-3xl mx-auto">
-          <p className="text-lg md:text-xl text-zinc-300 font-medium leading-relaxed uppercase tracking-widest text-center">
-            Your Personal AI Companion that remembers you, helps you think clearly, and keeps you moving forward.
-          </p>
-        </div>
+        
 
-        <Link href="/request-access">
-          <button className="mystic-button text-xl px-12 py-5 pointer-events-auto">
-            REQUEST ACCESS
-          </button>
-        </Link>
+          <FadeIn delay={0.7} className="w-full">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-none drop-shadow-2xl text-center">
+              The First AI That <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-white via-zinc-200 to-zinc-500">Actually Remembers You.</span>
+            </h2>
+          </FadeIn>
+
+          <FadeIn delay={0.9} className="w-full max-w-3xl">
+            <div className="flex flex-col items-center gap-6">
+              <p className="text-lg md:text-xl text-white font-light leading-relaxed text-center border-l-2 border-amber-500/50 pl-6 pr-6 md:border-l-0 md:border-t md:pt-6 md:pl-0">
+                An adaptive behavioral intelligence system that tracks your goals, promises, and emotional patterns — <span className="text-white font-semibold">and refuses to let you drift.</span>
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={1.1} className="flex flex-col md:flex-row gap-6 mt-8 w-full justify-center">
+            <Link href="/request-access" className="w-full md:w-auto">
+              <button className="mystic-button text-lg px-8 py-4 w-full md:w-auto">
+                ENTER THE SYSTEM
+              </button>
+            </Link>
+            <Link href="/features" className="w-full md:w-auto">
+              <button className="group relative px-8 py-4 w-full md:w-auto backdrop-blur-xl border border-white/10 bg-white/5 text-zinc-300 hover:text-white hover:bg-white/10 hover:border-amber-500/30 transition-all duration-300 uppercase text-sm font-bold tracking-widest overflow-hidden">
+                <span className="relative z-10">Explore Intelligence</span>
+                <div className="absolute inset-0 bg-amber-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              </button>
+            </Link>
+          </FadeIn>
+        </div>
       </div>
-    </section>
+    </section >
   );
 }

@@ -7,13 +7,13 @@ import FadeIn from '@/components/ui/FadeIn';
 export default function ContactPage() {
     return (
         <CinematicLayout
-            desktopImage="/op.png" // CHANGE THIS: "/contact-bg.png"
-            mobileImage="/mobop.png" // CHANGE THIS: "/contact-mobile.png"
+            desktopImage="/contact.png"
+            mobileImage="/contactmob.png"
         >
-            <div className="max-w-2xl mx-auto text-center space-y-12">
-                <div className="w-full h-32 md:h-48 flex items-center justify-center mb-8">
+            <div className="max-w-2xl mx-auto px-4 text-center space-y-12 pb-24">
+                <div className="w-full h-32 md:h-48 flex items-center justify-center mb-8 border-b border-white/10 pb-8">
                     <ChromeText
-                        text="Send the Signal"
+                        text="Contact Command"
                         size={3}
                         mobileSize={1.5}
                         height={0.5}
@@ -24,27 +24,24 @@ export default function ContactPage() {
                     />
                 </div>
 
-                <FadeIn delay={0.4}>
-                    <form className="space-y-6 w-full backdrop-blur-md bg-black/40 p-8 rounded-2xl border border-white/10 shadow-2xl">
-                        <div className="space-y-2 text-left">
-                            <label className="text-sm uppercase tracking-widest text-apex opacity-80 pl-1">Name</label>
-                            <input type="text" className="w-full bg-black/50 border border-white/20 rounded-lg p-4 text-white focus:border-amber-500/50 focus:outline-none transition-colors" placeholder="Your Name" />
-                        </div>
-                        <div className="space-y-2 text-left">
-                            <label className="text-sm uppercase tracking-widest text-apex opacity-80 pl-1">Email</label>
-                            <input type="email" className="w-full bg-black/50 border border-white/20 rounded-lg p-4 text-white focus:border-amber-500/50 focus:outline-none transition-colors" placeholder="Your Email" />
-                        </div>
-                        <div className="space-y-2 text-left">
-                            <label className="text-sm uppercase tracking-widest text-apex opacity-80 pl-1">Message</label>
-                            <textarea rows={6} className="w-full bg-black/50 border border-white/20 rounded-lg p-4 text-white focus:border-amber-500/50 focus:outline-none transition-colors" placeholder="How can we help?" />
-                        </div>
+                <FadeIn delay={0.2} className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div className="bg-zinc-900/40 p-6 rounded-lg border border-zinc-700 hover:border-amber-500 transition-colors duration-300">
+                        <h3 className="text-zinc-500 uppercase tracking-widest text-xs mb-2">Support Relay</h3>
+                        <a href="mailto:support@apex.ai" className="text-xl text-white font-mono hover:text-amber-500 transition-colors">support@apex.ai</a>
+                    </div>
+                    <div className="bg-zinc-900/40 p-6 rounded-lg border border-zinc-700 hover:border-amber-500 transition-colors duration-300">
+                        <h3 className="text-zinc-500 uppercase tracking-widest text-xs mb-2">Partnership Uplink</h3>
+                        <a href="mailto:partners@apex.ai" className="text-xl text-white font-mono hover:text-amber-500 transition-colors">partners@apex.ai</a>
+                    </div>
+                </FadeIn>
 
-                        <div className="pt-4">
-                            <button type="submit" className="mystic-button w-full">
-                                Transmit
-                            </button>
-                        </div>
-                    </form>
+                <FadeIn delay={0.4} className="space-y-4">
+                    <h3 className="text-white font-bold uppercase tracking-wider mb-6">System Protocols</h3>
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-zinc-400">
+                        <a href="/faq" className="hover:text-white transition-colors border-b border-transparent hover:border-amber-500 pb-1">FAQ Database</a>
+                        <a href="/privacy" className="hover:text-white transition-colors border-b border-transparent hover:border-amber-500 pb-1">Privacy Protocol</a>
+                        <a href="/terms" className="hover:text-white transition-colors border-b border-transparent hover:border-amber-500 pb-1">Terms of Service</a>
+                    </div>
                 </FadeIn>
             </div>
         </CinematicLayout>

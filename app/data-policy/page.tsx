@@ -1,6 +1,7 @@
 'use client';
 
 import CinematicLayout from '@/components/CinematicLayout';
+import ChromeText from '@/components/ui/ChromeText';
 
 const principles = [
     { title: "What Companion AI Does", desc: "It processes your project data to provide contextual assistance and execution support." },
@@ -11,11 +12,23 @@ const principles = [
 
 export default function DataPolicyPage() {
     return (
-        <CinematicLayout>
+        <CinematicLayout
+            desktopImage="/featuresdesktop.png"
+            mobileImage="/featuremob.png"
+        >
             <div className="max-w-4xl mx-auto text-center space-y-16 animate-fade-in-up">
-                <h1 className="text-5xl md:text-7xl font-bold text-apex drop-shadow-2xl">
-                    AI & Data Policy
-                </h1>
+                <div className="w-full h-32 md:h-48 flex items-center justify-center mb-8">
+                    <ChromeText
+                        text="AI & Data Policy"
+                        size={3}
+                        mobileSize={1.5}
+                        height={0.5}
+                        autoFit={true}
+                        letterSpacing={0.05}
+                        envMapIntensity={1}
+                        className="w-full h-full"
+                    />
+                </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
                     {principles.map((item, idx) => (

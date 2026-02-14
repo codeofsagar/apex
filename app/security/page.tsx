@@ -1,6 +1,7 @@
 'use client';
 
 import CinematicLayout from '@/components/CinematicLayout';
+import ChromeText from '@/components/ui/ChromeText';
 
 const points = [
     "Your data stays yours",
@@ -11,11 +12,23 @@ const points = [
 
 export default function SecurityPage() {
     return (
-        <CinematicLayout>
+        <CinematicLayout
+            desktopImage="/featuresdesktop.png"
+            mobileImage="/featuremob.png"
+        >
             <div className="max-w-4xl mx-auto text-center space-y-16 animate-fade-in-up">
-                <h1 className="text-5xl md:text-7xl font-bold text-apex drop-shadow-2xl">
-                    Built for Control
-                </h1>
+                <div className="w-full h-32 md:h-48 flex items-center justify-center mb-8">
+                    <ChromeText
+                        text="Built for Control"
+                        size={3}
+                        mobileSize={1.5}
+                        height={0.5}
+                        autoFit={true}
+                        letterSpacing={0.05}
+                        envMapIntensity={1}
+                        className="w-full h-full"
+                    />
+                </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
                     {points.map((point, idx) => (
